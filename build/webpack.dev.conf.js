@@ -32,7 +32,7 @@ module.exports = merge(baseWebpackConfig, {
     }),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      title: 'Vue Admin',
+      title: '基尔萌科技 - 用户中心',
       filename: 'index.html',
       template: 'index.html',
       inject: true,

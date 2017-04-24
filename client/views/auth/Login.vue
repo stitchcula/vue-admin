@@ -1,43 +1,36 @@
-<template>
-<div class="content has-text-centered">
-  <h1 class="is-title is-bold">Login</h1>
+<template lang="pug">
+  div.content.has-text-centered
+    h1.is-title.is-bold 登录
 
-  <div class="columns is-vcentered">
-    <div class="column is-6 is-offset-3">
-      <div class="box">
-        <div v-show="error" style="color:red; word-wrap:break-word;">{{ error }}</div>
-        <form v-on:submit.prevent="login">
-          <label class="label">Email</label>
-          <p class="control">
-            <input v-model="data.body.username" class="input" type="text" placeholder="email@example.org">
-          </p>
-          <label class="label">Password</label>
-          <p class="control">
-            <input v-model="data.body.password" class="input" type="password" placeholder="password">
-          </p>
+    div.columns.is-vcentered
+      div.column.is-12-mobile.is-6-tablet.is-offset-3-tablet.is-4-desktop.is-offset-4-desktop
+        div.box
+          div(v-show="error", style="color:red; word-wrap:break-word;") {{ error }}
+          form(v-on:submit.prevent="login")
+            label.label 账号/邮箱
+            p.control
+              input.input(v-model="data.body.username", type="text", placeholder="somebody@shibeta.com")
+            label.label 密码
+            p.control
+              input.input(v-model="data.body.password", type="password", placeholder="password")
 
-          <p class="control">
-            <label class="checkbox">
-              <input type="checkbox" v-model="data.rememberMe">
-              Remember me
-            </label>
-          </p>
+            p.control
+              label.checkbox
+                input(type="checkbox", v-model="data.rememberMe")
+                |保持登录
 
-          <hr>
-          <p class="control">
-            <button type="submit" class="button is-primary">Login</button>
-            <button class="button is-default">Cancel</button>
-          </p>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+            hr
+            p.control
+              button.button.is-primary(type="submit") 登录
+              button.button.is-default 取消
+    footer-bar
 </template>
 
 <script>
-export default {
+import JsSHA from 'jssha'
+import { FooterBar } from 'components/layout/'
 
+export default {
   data () {
     return {
       data: {
@@ -54,21 +47,26 @@ export default {
     if (this.$auth.redirect()) {
       console.log('Redirect from: ' + this.$auth.redirect().from.name)
     }
-    // Can set query parameter here for auth redirect or just do it silently in login redirect.
   },
   methods: {
     login () {
       var redirect = this.$auth.redirect()
+      var hasher = new JsSHA('SHA-256', 'TEXT')
+      hasher.update(this.data.body.password)
+      var password = hasher.getHash('HEX')
       this.$auth.login({
         headers: {
           'Content-Type': 'application/json'
         },
-        data: this.data.body,
+        data: {
+          username: this.data.body.username,
+          password: password
+        },
         rememberMe: this.data.rememberMe,
         redirect: {name: redirect ? redirect.from.name : 'Home'},
         success (res) {
           console.log('Auth Success')
-          // console.log('Token: ' + this.$auth.token())
+          console.log('Token: ' + this.$auth.token())
           // console.log(res)
         },
         error (err) {
@@ -87,19 +85,28 @@ export default {
         }
       })
     }
-  }
+  },
   // filters: {
   //   json: function (value) {
   //     console.log(value)
   //     return value
   //   }
   // }
-
+  components: {
+    FooterBar
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.is-title {
-    text-transform: capitalize;
-}
+  .content {
+    padding: 20px;
+    .is-title {
+      text-transform: capitalize;
+      margin: 3rem auto;
+    }
+    .button {
+      margin: 3px;
+    }
+  }
 </style>

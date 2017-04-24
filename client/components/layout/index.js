@@ -1,7 +1,9 @@
-export Navbar from './Navbar'
+export Navbar from './Navbar.vue'
 
-export Sidebar from './Sidebar'
+export Sidebar from './Sidebar.vue'
 
-export AppMain from './AppMain'
+export AppMain from './AppMain.vue'
 
-export FooterBar from './FooterBar'
+export FooterBar from './FooterBar.vue'
+
+export Panel from './Panel.vue'
