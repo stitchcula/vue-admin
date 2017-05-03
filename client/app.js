@@ -13,6 +13,8 @@ import { TOGGLE_SIDEBAR } from 'vuex-store/mutation-types'
 
 Vue.router = router
 Vue.use(VueAxios, axios)
+Vue.axios.defaults.baseURL = 'http://panel.digimon.tech/api/v1'
+
 Vue.use(VueAuth, auth)
 
 Vue.use(NProgress)

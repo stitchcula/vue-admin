@@ -1,6 +1,5 @@
 <template lang="pug">
   section.app-main
-    precheck
     transition(mode="out-in",
         enter-active-class="fadeIn",
         leave-active-class="fadeOut",
@@ -9,11 +8,7 @@
 </template>
 
 <script>
-  import Precheck from '../../views/auth/Precheck.vue'
   export default {
-    components: {
-      Precheck
-    }
   }
 </script>
 

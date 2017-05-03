@@ -9,7 +9,7 @@
             leave-active-class="fadeOut",
             appear)
           router-view.animated
-        footer-bar
+        //footer-bar
 </template>
 
 <script>
@@ -23,7 +23,6 @@
       FooterBar,
       Sidebar
     },
-
     computed: mapGetters({
       sidebar: 'sidebar'
     })

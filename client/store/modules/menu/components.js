@@ -1,6 +1,7 @@
 import lazyLoading from './lazyLoading'
 
 export default {
+  name: 'Components',
   path: '/components',
   meta: {
     icon: 'fa-building-o',
@@ -10,14 +11,6 @@ export default {
   component: lazyLoading('components', true),
 
   children: [
-    {
-      name: 'Components',
-      path: '',
-      component: lazyLoading('components/Default'),
-      meta: {
-        link: 'components/Default.vue'
-      }
-    },
     {
       name: 'BackToTop',
       path: 'backToTop',

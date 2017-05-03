@@ -9,15 +9,15 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return this.$store.state.pkg
+  export default {
+    data () {
+      return this.$store.state.pkg
+    }
   }
-}
 </script>
 
 <style lang="scss" scoped>
-.is-title {
-  text-transform: capitalize;
-}
+  .is-title {
+    text-transform: capitalize;
+  }
 </style>

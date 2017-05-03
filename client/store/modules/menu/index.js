@@ -4,6 +4,8 @@ import charts from './charts'
 import uifeatures from './uifeatures'
 import components from './components'
 import tables from './tables'
+import managers from './managers'
+import audimon from './audimon'
 
 // show: meta.label -> name
 // name: component name
@@ -12,7 +14,7 @@ import tables from './tables'
 const state = {
   items: [
     {
-      name: 'Dashboard',
+      name: '概览',
       path: '/dashboard',
       meta: {
         icon: 'fa-tachometer',
@@ -21,19 +23,20 @@ const state = {
       component: lazyLoading('dashboard', true)
     },
     {
-      name: 'Axios',
-      path: '/axiosDemo',
+      name: '个人信息',
+      path: '/self',
       meta: {
-        auth: true,
-        icon: 'fa-rocket',
-        link: 'axios/index.vue'
+        icon: 'fa-user-o',
+        link: 'self/index.vue'
       },
-      component: lazyLoading('axios', true)
+      component: lazyLoading('self', true)
     },
     charts,
     uifeatures,
     components,
-    tables
+    tables,
+    managers,
+    audimon
   ]
 }
 

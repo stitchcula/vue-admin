@@ -1,6 +1,7 @@
 import lazyLoading from './lazyLoading'
 
 export default {
+  name: 'UI Features',
   meta: {
     label: 'UI Features',
     icon: 'fa-laptop',

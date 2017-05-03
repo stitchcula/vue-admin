@@ -35,6 +35,21 @@
       document.addEventListener('visibilitychange', handler)
       window.addEventListener('DOMContentLoaded', handler)
       window.addEventListener('resize', handler)
+
+      this.$http.head('/u')
+        .then(res => {
+          console.log('pre-check')
+        }, err => {
+          if (err.response && err.response.status !== 204) {
+            this.$router.push('/login')
+          }
+        })
+        .then(() => {
+          document.querySelector('#precheck').style.opacity = 0
+          setTimeout(() => {
+            document.querySelector('#precheck').style.display = 'none'
+          }, 800)
+        })
     },
 
     methods: mapActions([
@@ -59,8 +74,18 @@
 
   html {
     background-color: whitesmoke;
-    overflow-y: auto!important;
   }
+
+  .modal-container{
+    @include mobile() {
+      width: 90%!important;
+    }
+
+    .modal-content{
+      margin: 0!important;
+    }
+  }
+
 
   .nprogress-container {
     position: fixed !important;

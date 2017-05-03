@@ -1,7 +1,7 @@
 <template>
   <aside class="menu app-sidebar animated" :class="{ slideInLeft: show, slideOutLeft: !show }">
     <p class="menu-label">
-      General
+      GUILMON TECH
     </p>
     <ul class="menu-list">
       <li v-for="(item, index) in menu">
@@ -24,6 +24,7 @@
           <ul v-show="isExpanded(item)">
             <li v-for="subItem in item.children" v-if="subItem.path">
               <router-link :to="generatePath(item, subItem)">
+                <span class="icon is-small" v-if="item.meta.icon"><i :class="['fa', subItem.meta.icon]"></i></span>
                 {{ subItem.meta && subItem.meta.label || subItem.name }}
               </router-link>
             </li>
@@ -136,6 +137,7 @@
   @import '~bulma/sass/utilities/variables';
   @import '~bulma/sass/utilities/mixins';
 
+  ::-webkit-scrollbar{width:0px;}
   .app-sidebar {
     position: fixed;
     top: 50px;
@@ -158,6 +160,7 @@
 
     .icon {
       vertical-align: baseline;
+      margin-right: 3px;
       &.is-angle {
         position: absolute;
         right: 10px;

@@ -50,12 +50,10 @@
       ]),
       logout () {
         this.$auth.logout({
-          redirect: 'Home',
-          makeRequest: false
-          // params: {},
+          redirect: '/login',
+          makeRequest: true
           // success: function () {},
           // error: function () {},
-          // etc...
         })
       }
     }

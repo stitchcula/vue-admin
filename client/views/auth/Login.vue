@@ -5,9 +5,9 @@
     div.columns.is-vcentered
       div.column.is-12-mobile.is-6-tablet.is-offset-3-tablet.is-4-desktop.is-offset-4-desktop
         div.box
-          div(v-show="error", style="color:red; word-wrap:break-word;") {{ error }}
-          form(v-on:submit.prevent="login")
-            label.label 账号/邮箱
+          notification(v-show="error", :title="error", :container="'.styles-box'", :type="'danger'", :direction="'Down'", :duration="0")
+          form(v-on:submit.prevent="login").is-clearfix
+            label.label 用户名/邮箱
             p.control
               input.input(v-model="data.body.username", type="text", placeholder="somebody@shibeta.com")
             label.label 密码
@@ -20,15 +20,15 @@
                 |保持登录
 
             hr
-            p.control
+            p.control.is-pulled-right
               button.button.is-primary(type="submit") 登录
-              button.button.is-default 取消
     footer-bar
 </template>
 
 <script>
 import JsSHA from 'jssha'
 import { FooterBar } from 'components/layout/'
+import Notification from 'vue-bulma-notification'
 
 export default {
   data () {
@@ -65,35 +65,21 @@ export default {
         rememberMe: this.data.rememberMe,
         redirect: {name: redirect ? redirect.from.name : 'Home'},
         success (res) {
-          console.log('Auth Success')
-          console.log('Token: ' + this.$auth.token())
-          // console.log(res)
+          console.log(res)
         },
         error (err) {
           if (err.response) {
-            // The request was made, but the server responded with a status code
-            // that falls out of the range of 2xx
-            // console.log(err.response.status)
-            // console.log(err.response.data)
-            // console.log(err.response.headers)
-            this.error = err.response.data
+            this.error = err.response.data.error
           } else {
-            // Something happened in setting up the request that triggered an Error
             console.log('Error', err.message)
           }
-          console.log(err.config)
         }
       })
     }
   },
-  // filters: {
-  //   json: function (value) {
-  //     console.log(value)
-  //     return value
-  //   }
-  // }
   components: {
-    FooterBar
+    FooterBar,
+    Notification
   }
 }
 </script>
@@ -104,9 +90,6 @@ export default {
     .is-title {
       text-transform: capitalize;
       margin: 3rem auto;
-    }
-    .button {
-      margin: 3px;
     }
   }
 </style>
